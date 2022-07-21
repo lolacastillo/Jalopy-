@@ -40,6 +40,14 @@ export default function About(props) {
         </main>
     `;
 }
+// export function AboutEvents() {
+//     showNotification("Hey, a message!", "danger");
+// }
+
+function changeAboutText() {
+    document.querySelector("#about-text").innerText = "Hello World!";
+}
+
 export function AboutEvents() {
-    showNotification("Hey, a message!", "danger");
+    document.querySelector("#change-about-text").addEventListener("click", changeAboutText);
 }

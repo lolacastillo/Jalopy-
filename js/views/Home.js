@@ -6,25 +6,31 @@ const BASE_URI = `${BACKEND_HOST}/api/s3/download`;
 export default function Home(props) {
     return `
         <header>
-            <h1>Home Page</h1>
+            <h1 style="text-align: center">Hello Jalopy!</h1>
         </header>
         <main>
             <div>
+            <img id="jalopy-photo" src="assets/jalopy1.jpeg"/>
                 <p>
-                    This is the home page text.
-                </p>    
+                    Welcome to my Jalopy application!
+                </p>
+                <button id="img-button">Button</button>
             </div>
         </main>
     `;
 }
 
 export function HomeEvents() {
-    // TODO: use an enum for message type
-    // const authority = getUserRole();
-    const user = getUser();
-    if(!user) {
-        showNotification("Welcome visitor", "secondary");
-    } else {
-        showNotification("Welcome " + user.userName, "info");
-    }
+    var imgBtn = document.querySelector("#img-button");
+    var imgJalopy = document.querySelector("#jalopy-photo");
+    imgBtn.addEventListener("click", function(){
+        if (imgJalopy.src === "http://localhost:9000/assets/jalopy1.jpeg") {
+            imgJalopy.src = "http://localhost:9000/assets/jalopy2.jpeg"
+        }else if(imgJalopy.src === "http://localhost:9000/assets/jalopy2.jpeg"){
+            imgJalopy.src = "http://localhost:9000/assets/jalopy3.jpeg"
+        }else{
+            imgJalopy.src = "http://localhost:9000/assets/jalopy1.jpeg"
+        }
+
+})
 }
