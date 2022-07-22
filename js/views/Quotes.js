@@ -1,18 +1,14 @@
 export default function QuotesView(props) {
     return `
 <div id="my-quotes"></div>
+<button id="add-quote">Add One Quote</button>
+<button id="add-all-quote">Add All Quotes</button>
 `
 }
 
 export function QuotesEvents() {
     addQuote();
-}
-
-
-
-function addQuote(){
-    const divApp = document.querySelector("#my-quotes");
-    divApp.innerHTML = "<h1>" + giveMeQuotes[0] + "</h1>"
+    addAllQuotes();
 }
 
 function giveMeQuotes(){
@@ -29,5 +25,25 @@ function giveMeQuotes(){
         "Men, when they fight in movies, it's a very different style. Harrison Ford was so cool when he had the whip, and Bruce Lee was such an artist that you couldn't take your eyes off of him."
     ]
     return quoteArr;
-
 }
+
+function addQuote(){
+    var quotes = giveMeQuotes();
+    const button = document.querySelector("#add-quote");
+    const divApp = document.querySelector("#my-quotes");
+
+    button.addEventListener("click",function (){
+        divApp.innerHTML = "<h1>" + quotes[Math.floor(Math.random() * quotes.length)] + "</h1>"
+    })
+}
+function addAllQuotes(){
+    var quotes = giveMeQuotes();
+    const button = document.querySelector("#add-all-quote");
+    const divApp = document.querySelector("#my-quotes");
+    button.addEventListener("click",function (){
+        for (var i = 0; i<quotes.length; i++){
+            divApp.innerHTML += "<h1>" + quotes[i] + "</h1>"
+        }    })
+}
+
+
