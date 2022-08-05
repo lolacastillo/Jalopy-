@@ -8,8 +8,9 @@ import Register from "./views/Register.js"
 import {RegisterEvent} from "./views/Register.js";
 import UserIndex, {UserEvents} from "./views/User.js";
 import Logout, {LogoutEvents} from "./views/Logout.js";
-import DogFactsView, {DogFactsEvents} from "./views/DogFacts.js";
+import dogFactsHTMLFunction , {DogFactsEvents} from "./views/DogFacts.js";
 import QuotesView, {QuotesEvents} from "./views/Quotes.js";
+import InsertDogView, {InsertDogFactEvents} from "./views/AddDogFact.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -73,18 +74,41 @@ export default function router(URI) {
             title: 'Loading...',
         },
         '/dogs': {
-            returnView: DogFactsView,
-            state: {},
-            uri: '/dogs',
-            title: 'Dog Facts',
-            viewEvent: DogFactsEvents
-        },
+            returnView: dogFactsHTMLFunction,
+            state:{
+                dogFacts: {
+                    url: "https://dogfacts.fulgentcorp.com:12250/v1/facts?random=true&limit=10",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': DOG_QUOTE_API_KEY
+                    }
+                }
+            },
+                    uri: '/dogs',
+                    title: 'Dog Facts',
+                    viewEvent: DogFactsEvents
+                },
         '/quotes': {
             returnView: QuotesView,
-            state: {},
+            state: {
+                quotes: {
+                    url: "https://quotes.fulgentcorp.com:12250/v1/quotes?random=true&limit=10",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': DOG_QUOTE_API_KEY
+                    }
+                }
+            },
             uri: '/quotes',
             title: 'Quotes',
             viewEvent: QuotesEvents
+        },
+        '/insert-dog-fact': {
+            returnView: InsertDogView,
+            state: {},
+            uri: '/insert-dog-fact',
+            title: 'Insert Dog Fact',
+            viewEvent: InsertDogFactEvents
         },
     };
 
